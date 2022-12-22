@@ -155,6 +155,7 @@ namespace SpriteKind {
     export const Goal = SpriteKind.create()
     export const Coin = SpriteKind.create()
     export const Flier = SpriteKind.create()
+    export const Lava = SpriteKind.create()
 }
 
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Bumper, function on_on_overlap(sprite: Sprite, otherSprite: Sprite) {
@@ -360,6 +361,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function on_on_overlap2(sp
     info.changeScoreBy(3)
     music.baDing.play()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Lava, function on_on_overlap4(sprite: Sprite, otherSprite: Sprite) {
+    info.changeLifeBy(-1)
+    sprite.say("Ow!", invincibilityPeriod)
+    pause(invincibilityPeriod)
+})
 function attemptJump() {
     
     //  else if: either fell off a ledge, or double jumping
@@ -432,31 +438,11 @@ function setLevelTileMap(level: number) {
         `)
     } else if (level == 1) {
         tiles.setTilemap(tilemap`
-            level_0
+            nivel_1
         `)
     } else if (level == 2) {
         tiles.setTilemap(tilemap`
-            level_1
-        `)
-    } else if (level == 3) {
-        tiles.setTilemap(tilemap`
-            level_2
-        `)
-    } else if (level == 4) {
-        tiles.setTilemap(tilemap`
-            level_3
-        `)
-    } else if (level == 5) {
-        tiles.setTilemap(tilemap`
-            level_4
-        `)
-    } else if (level == 6) {
-        tiles.setTilemap(tilemap`
-            level_5
-        `)
-    } else if (level == 7) {
-        tiles.setTilemap(tilemap`
-            level_6
+            nivel_2
         `)
     }
     
@@ -900,6 +886,30 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Flier, function on_on_overlap3(s
 })
 function createEnemies() {
     
+    for (let lavaTile of tiles.getTilesByType(sprites.dungeon.hazardLava0)) {
+        lava = sprites.create(img`
+                5 5 4 2 2 2 2 2 4 2 2 2 2 4 4 5
+                5 4 2 2 2 2 2 4 4 4 4 4 4 4 5 5
+                4 2 2 4 2 4 4 4 5 5 5 5 5 5 4 4
+                2 2 2 2 4 4 5 5 4 4 4 5 4 5 4 4
+                4 4 2 4 4 5 5 4 4 2 2 4 5 4 4 2
+                4 4 2 4 5 4 4 2 2 2 2 4 5 4 4 2
+                2 2 4 5 4 4 2 2 2 4 4 2 5 5 4 2
+                4 4 5 5 4 2 2 2 2 4 4 2 4 5 5 4
+                5 5 5 4 2 2 4 2 2 2 2 2 4 5 5 5
+                4 5 4 4 2 2 2 2 2 2 2 2 4 5 4 4
+                4 5 5 2 2 4 2 2 2 4 2 2 4 5 5 4
+                5 5 4 2 4 2 4 2 2 2 2 4 5 5 5 5
+                4 5 5 4 2 4 2 2 2 2 2 4 5 4 4 4
+                4 5 5 5 2 2 2 4 4 4 5 5 5 4 2 2
+                4 5 5 4 5 5 5 5 5 5 5 4 4 2 2 2
+                4 5 5 4 4 4 4 4 4 4 4 2 2 2 4 4
+                `, SpriteKind.Lava)
+        tiles.placeOnTile(lava, lavaTile)
+        tiles.setTileAt(lavaTile, assets.tile`
+                tile0
+            `)
+    }
     //  enemy that moves back and forth
     for (let value5 of tiles.getTilesByType(assets.tile`
         tile4
@@ -1048,6 +1058,7 @@ let coin : Sprite = null
 let playerStartLocation : tiles.Location = null
 let flier : Sprite = null
 let bumper : Sprite = null
+let lava : Sprite = null
 let mainCrouchRight : animation.Animation = null
 let mainCrouchLeft : animation.Animation = null
 let mainJumpRight : animation.Animation = null

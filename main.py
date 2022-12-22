@@ -17,6 +17,7 @@ class SpriteKind:
     Goal = SpriteKind.create()
     Coin = SpriteKind.create()
     Flier = SpriteKind.create()
+    Lava = SpriteKind.create()
 
 def on_on_overlap(sprite, otherSprite):
     if sprite.vy > 0 and not (sprite.is_hitting_tile(CollisionDirection.BOTTOM)) or sprite.y < otherSprite.top:
@@ -218,6 +219,13 @@ def on_on_overlap2(sprite2, otherSprite2):
     music.ba_ding.play()
 sprites.on_overlap(SpriteKind.player, SpriteKind.Coin, on_on_overlap2)
 
+def on_on_overlap4(sprite,otherSprite):
+    info.change_life_by(-1)
+    sprite.say("Ow!", invincibilityPeriod)
+    pause(invincibilityPeriod)
+sprites.on_overlap(SpriteKind.player, SpriteKind.Lava, on_on_overlap4)
+
+
 def attemptJump():
     global doubleJumpSpeed, canDoubleJump
     # else if: either fell off a ledge, or double jumping
@@ -282,31 +290,11 @@ def setLevelTileMap(level: number):
         """))
     elif level == 1:
         tiles.set_tilemap(tilemap("""
-            level_0
+            nivel_1
         """))
     elif level == 2:
         tiles.set_tilemap(tilemap("""
-            level_1
-        """))
-    elif level == 3:
-        tiles.set_tilemap(tilemap("""
-            level_2
-        """))
-    elif level == 4:
-        tiles.set_tilemap(tilemap("""
-            level_3
-        """))
-    elif level == 5:
-        tiles.set_tilemap(tilemap("""
-            level_4
-        """))
-    elif level == 6:
-        tiles.set_tilemap(tilemap("""
-            level_5
-        """))
-    elif level == 7:
-        tiles.set_tilemap(tilemap("""
-            level_6
+            nivel_2
         """))
     initializeLevel(level)
 def initializeFlierAnimations():
@@ -734,7 +722,31 @@ def on_on_overlap3(sprite4, otherSprite3):
 sprites.on_overlap(SpriteKind.player, SpriteKind.Flier, on_on_overlap3)
 
 def createEnemies():
-    global bumper, flier
+    global bumper, flier, lava
+    for lavaTile in tiles.get_tiles_by_type(sprites.dungeon.hazard_lava0):
+            lava = sprites.create(img("""
+                5 5 4 2 2 2 2 2 4 2 2 2 2 4 4 5
+                5 4 2 2 2 2 2 4 4 4 4 4 4 4 5 5
+                4 2 2 4 2 4 4 4 5 5 5 5 5 5 4 4
+                2 2 2 2 4 4 5 5 4 4 4 5 4 5 4 4
+                4 4 2 4 4 5 5 4 4 2 2 4 5 4 4 2
+                4 4 2 4 5 4 4 2 2 2 2 4 5 4 4 2
+                2 2 4 5 4 4 2 2 2 4 4 2 5 5 4 2
+                4 4 5 5 4 2 2 2 2 4 4 2 4 5 5 4
+                5 5 5 4 2 2 4 2 2 2 2 2 4 5 5 5
+                4 5 4 4 2 2 2 2 2 2 2 2 4 5 4 4
+                4 5 5 2 2 4 2 2 2 4 2 2 4 5 5 4
+                5 5 4 2 4 2 4 2 2 2 2 4 5 5 5 5
+                4 5 5 4 2 4 2 2 2 2 2 4 5 4 4 4
+                4 5 5 5 2 2 2 4 4 4 5 5 5 4 2 2
+                4 5 5 4 5 5 5 5 5 5 5 4 4 2 2 2
+                4 5 5 4 4 4 4 4 4 4 4 2 2 2 4 4
+                """)
+                ,SpriteKind.Lava)
+            tiles.place_on_tile(lava, lavaTile)
+            tiles.set_tile_at(lavaTile, assets.tile("""
+                tile0
+            """))
     # enemy that moves back and forth
     for value5 in tiles.get_tiles_by_type(assets.tile("""
         tile4
@@ -867,6 +879,7 @@ coin: Sprite = None
 playerStartLocation: tiles.Location = None
 flier: Sprite = None
 bumper: Sprite = None
+lava: Sprite = None
 mainCrouchRight: animation.Animation = None
 mainCrouchLeft: animation.Animation = None
 mainJumpRight: animation.Animation = None
