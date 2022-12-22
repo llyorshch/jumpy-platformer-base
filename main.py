@@ -698,6 +698,8 @@ def clearGame():
         value3.destroy()
     for value4 in sprites.all_of_kind(SpriteKind.Flier):
         value4.destroy()
+    for value5 in sprites.all_of_kind(SpriteKind.Lava):
+            value5.destroy()
 
 def on_overlap_tile(sprite3, location):
     global currentLevel

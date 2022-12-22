@@ -862,6 +862,9 @@ function clearGame() {
     for (let value4 of sprites.allOfKind(SpriteKind.Flier)) {
         value4.destroy()
     }
+    for (let value5 of sprites.allOfKind(SpriteKind.Lava)) {
+        value5.destroy()
+    }
 }
 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`
