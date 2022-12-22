@@ -1,33 +1,15 @@
+ # Jumpy platformer challenge
  
+ This repository contains a base Jumpy platformer Arcade MakeCode project to create a good challenge for your game developing skills. Are you ready? :-)
+ 
+ First, [open the game](https://llyorshch.github.io/jumpy-platformer-base/) and get used to the controls in level one. Continue to level 2 and... try to get to the end of the level. As you can imagine, the level 2 is intentionally impossible. So, what you can do? Hey, you're a programmer, you are reading this in GitHub isn't it?
 
+## Edit this project to get super-powers! ![Build status badge](https://github.com/llyorshch/jumpy-platformer-base/workflows/MakeCode/badge.svg)
 
-> Open this page at [https://llyorshch.github.io/jumpy-platformer-base/](https://llyorshch.github.io/jumpy-platformer-base/)
-
-## Use as Extension
-
-This repository can be added as an **extension** in MakeCode.
-
-* open [https://arcade.makecode.com/](https://arcade.makecode.com/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/llyorshch/jumpy-platformer-base** and import
-
-## Edit this project ![Build status badge](https://github.com/llyorshch/jumpy-platformer-base/workflows/MakeCode/badge.svg)
-
-To edit this repository in MakeCode.
+To edit this repository in MakeCode:
 
 * open [https://arcade.makecode.com/](https://arcade.makecode.com/)
 * click on **Import** then click on **Import URL**
 * paste **https://github.com/llyorshch/jumpy-platformer-base** and click import
 
-## Blocks preview
 
-This image shows the blocks code from the last commit in master.
-This image may take a few minutes to refresh.
-
-![A rendered view of the blocks](https://github.com/llyorshch/jumpy-platformer-base/raw/master/.github/makecode/blocks.png)
-
-#### Metadata (used for search, rendering)
-
-* for PXT/arcade
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
