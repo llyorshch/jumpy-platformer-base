@@ -1052,9 +1052,16 @@ createPlayer(hero)
 levelCount = 8
 currentLevel = 0
 setLevelTileMap(currentLevel)
+game.on_game_over(on_game_over)
 giveIntroduction()
-# set up hero animations
 
+
+# Github hint on game over
+def on_game_over(win):
+    game.splash("Too hard? -> https://tinyurl.com/flyjumpy")
+    game.reset()
+
+# set up hero animations
 def on_on_update():
     global heroFacingLeft
     if hero.vx < 0:

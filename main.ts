@@ -1231,7 +1231,12 @@ createPlayer(hero)
 levelCount = 8
 currentLevel = 0
 setLevelTileMap(currentLevel)
+game.onGameOver(function on_game_over(win: boolean) {
+    game.splash("Too hard? -> https://tinyurl.com/flyjumpy")
+    game.reset()
+})
 giveIntroduction()
+//  Github hint on game over
 //  set up hero animations
 game.onUpdate(function on_on_update() {
     
